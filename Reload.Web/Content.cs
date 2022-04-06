@@ -24,7 +24,6 @@ namespace Reload.Web
 
         void Initialize()
         {
-            Init?.Invoke(Page, new EventArgs());
             Page.InitComplete += (object sender, EventArgs e) => { InitComplete?.Invoke(sender, e); };
             Page.PreLoad += (object sender, EventArgs e) => { PreLoad?.Invoke(sender, e); };
             Page.Load += (object sender, EventArgs e) => { Load?.Invoke(sender, e); };

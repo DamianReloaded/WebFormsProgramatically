@@ -16,13 +16,23 @@ namespace Reload.Web
         public HtmlForm Form { get; set; }
         public ScriptManager ScriptManager { get; set; }
         public List<string> StyleSheets { get; set; } = new List<string> { "~/Default.css" };
-
+        public List<string> Scripts { get; set; } = new List<string>();
+        
+        public event EventHandler LoadContent;
         public void AddStyleSheet(string path)
         {
             HtmlLink link = new HtmlLink();
             link.Href = path;
             link.Attributes.Add("type", "text/css");
             link.Attributes.Add("rel", "stylesheet");
+            Header.Controls.Add(link);
+        }
+
+        public void AddScript(string path)
+        {
+            HtmlGenericControl link = new HtmlGenericControl("script");
+            link.Attributes.Add("type", "text/javascript");
+            link.Attributes.Add("src", path);
             Header.Controls.Add(link);
         }
 
@@ -39,6 +49,7 @@ namespace Reload.Web
                 Form = new HtmlForm();
                 ScriptManager = new ScriptManager();
                 Title.InnerText = "Home";
+                foreach (string path in Scripts) AddScript(path);
                 foreach (string path in StyleSheets) AddStyleSheet(path);
                 Html.Controls.Add(doctype);
                 {
@@ -57,10 +68,10 @@ namespace Reload.Web
                 }
                 Page.Controls.Add(Html); // All tags must be added before controls
 
-                RenderPage();
+                LoadContent?.Invoke(Page, e);
             };
         }
 
-        public virtual void RenderPage() { }
+        public virtual void OnLoad() { }
     }
 }

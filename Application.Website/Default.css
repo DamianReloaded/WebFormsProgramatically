@@ -8,8 +8,8 @@
     font: 12px Verdana;
     width: 100%;
     background-color: #F8F8F8;
-    margin: 5px 0 10px 0;
-    border: solid 2px #E5E5E5;
+    margin: 0px 0 0px 0;
+    border: solid 1px #E5E5E5;
     border-collapse: collapse;
 }
 
@@ -26,6 +26,7 @@
 
 .GridView th {
     font: 12px Verdana;
+    font-weight: bold;
     padding: 5px;
     background: #EBEBEB;
 }

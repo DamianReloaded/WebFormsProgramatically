@@ -18,15 +18,28 @@ namespace Reload.Web
                 browser = new SiteBrowser();
                 HttpContext.Current.Session["SiteBrowser"] = browser;
             }
-
-            string pageName = HttpContext.Current.Request.QueryString["page"] ?? "NotFound";
-            if (browser.Pages.ContainsKey(pageName))
+            string pageName = (HttpContext.Current.Request.QueryString["page"] ?? Constants.SystemPageName.NotFound).ToLower();
+            if (!browser.IsAuthenticated())
+            {
+                pageName = Constants.SystemPageName.Login;
+            }
+            if (!browser.Pages.ContainsKey(pageName)) pageName = Constants.SystemPageName.NotFound;
+            try
             {
                 Reload.Web.Content content = ((Func<Reload.Web.Content>)browser.Pages[pageName])();
                 content.Page = page;
             }
-            
+            catch (Exception /*ex*/)
+            {
+
+            }
             return browser;
+        }
+
+        public bool IsAuthenticated()
+        {
+            string value = (string)HttpContext.Current.Session["RELOAD_AUTHENTICATED"] ?? "false";
+            return "true" == value;
         }
 
         public SiteBrowser()

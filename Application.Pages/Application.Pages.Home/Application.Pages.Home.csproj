@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0BB9C70E-4CEE-4170-A6AE-A29FEC02B187}</ProjectGuid>
+    <ProjectGuid>{82C850F3-B677-4D0E-9C73-64279E6FB114}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Reload.Web</RootNamespace>
-    <AssemblyName>Reload.Web</AssemblyName>
+    <RootNamespace>Application.Pages.Home</RootNamespace>
+    <AssemblyName>Application.Pages.Home</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,19 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrowserInitializer.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Constants.cs" />
-    <Compile Include="Content.cs" />
-    <Compile Include="GridJS.cs" />
-    <Compile Include="Grid.cs" />
-    <Compile Include="HtmlPage.cs" />
-    <Compile Include="Log.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SiteBrowser.cs" />
-    <Compile Include="SystemPages\NotFound.cs" />
-    <Compile Include="SystemPages\Login.cs" />
+    <Compile Include="Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application.Frontend\Application.Frontend.csproj">
+      <Project>{f3948e28-4c4f-400f-9547-0046d55ca43b}</Project>
+      <Name>Application.Frontend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application.Modules\Application.Modules.Home\Application.Modules.Home.csproj">
+      <Project>{6b3b2548-ac05-4f9b-bff8-9cc0d608c5d7}</Project>
+      <Name>Application.Modules.Home</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Reload.Web\Reload.Web.csproj">
+      <Project>{0bb9c70e-4cee-4170-a6ae-a29fec02b187}</Project>
+      <Name>Reload.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
